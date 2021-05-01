@@ -46,8 +46,21 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             SearchArea(),
+            Row(
+              children: [
+                propertyTypes('3sq.jpg'),
+              ],
+            ),
           ],
         ),
+      ),
+    );
+  }
+
+  Container propertyTypes(String _image) {
+    return Container(
+      child: Column(
+        children: [Image(image: AssetImage(_image))],
       ),
     );
   }
