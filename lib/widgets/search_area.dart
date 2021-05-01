@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'constants.dart';
+
+
 class SearchArea extends StatefulWidget {
   @override
   _SearchAreaState createState() => _SearchAreaState();
@@ -13,7 +16,7 @@ class _SearchAreaState extends State<SearchArea> {
       children: [
         Container(
           width: MediaQuery.of(context).size.width * 0.75,
-          child: searchBar(null, null, null),
+          child: SearchBar(color: null, text: 'Search', icon: null),
         ),
         Container(
           width: 50,
@@ -34,27 +37,6 @@ class _SearchAreaState extends State<SearchArea> {
       ],
     );
   }
-
-  TextField searchBar(Color? _color, String? _text, Icon? _icon) {
-    _icon == null ? Icon(Icons.search) : _icon;
-    return TextField(
-      cursorColor: Colors.black54,
-      cursorHeight: 18,
-      cursorWidth: 5,
-      decoration: InputDecoration(
-        filled: true,
-        fillColor: _color == null ? Colors.white : _color,
-        prefixIcon: _icon,
-        hintText: 'Search $_text',
-        hintStyle: TextStyle(color: Colors.grey),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          borderSide: BorderSide.none,
-        ),
-      ),
-    );
-  }
-
   Future<void> bottomModal(BuildContext context) {
     return showModalBottomSheet<void>(
       context: context,
@@ -105,11 +87,7 @@ class _SearchAreaState extends State<SearchArea> {
                   left: 0,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-                    child: searchBar(
-                      Colors.grey[200],
-                      'Search location',
-                      Icon(Icons.pin_drop),
-                    ),
+                    child: SearchBar(color: Colors.grey[200], text: 'Search location', icon: Icon(Icons.pin_drop)),
                   ),
                 ),
                 Positioned(
@@ -121,10 +99,7 @@ class _SearchAreaState extends State<SearchArea> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        h3Title('Property types'),
-                        // ListView(
-                        //   scrollDirection: Axis.horizontal,
-                        // ),
+                        H3Title(title: 'Property types'),
                       ],
                     ),
                   ),
@@ -137,13 +112,38 @@ class _SearchAreaState extends State<SearchArea> {
     );
   }
 
-  Text h3Title(String title) {
-    return Text(
-      '$title',
-      style: TextStyle(
-        color: Colors.black,
-        fontSize: 25,
-        fontWeight: FontWeight.bold,
+}
+
+
+class SearchBar extends StatelessWidget {
+  SearchBar({
+    Key? key,
+    required Color? color,
+    required String? text,
+    required Icon? icon,
+  }) : _color = color, _text = text, _icon = icon, super(key: key);
+
+  final Color? _color;
+  final String? _text;
+  Icon? _icon;
+
+  @override
+  Widget build(BuildContext context) {
+    _icon = _icon == null ? Icon(Icons.search) : _icon;
+    return TextField(
+      cursorColor: Colors.black54,
+      cursorHeight: 18,
+      cursorWidth: 5,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: _color == null ? Colors.white : _color,
+        prefixIcon: _icon,
+        hintText: '$_text',
+        hintStyle: TextStyle(color: Colors.grey),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          borderSide: BorderSide.none,
+        ),
       ),
     );
   }
