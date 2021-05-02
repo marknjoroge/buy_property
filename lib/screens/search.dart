@@ -12,6 +12,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200],
       body: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
@@ -53,17 +54,26 @@ class _SearchPageState extends State<SearchPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
               child: Container(
-                height: 100,
+                height: 130,
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    propertyBrokers('assets/images/brokers/company.png', true, 'harder'),
-                    propertyBrokers('assets/images/brokers/harder.png', false, 'company Brokers'),
-                    propertyBrokers('assets/images/brokers/horizon.jpg', false, 'horizon homes'),
+                    propertyBrokers(
+                        'assets/brokers/company.png', true, 'harder'),
+                    propertyBrokers(
+                        'assets/brokers/harder.png', false, 'some brokers'),
+                    propertyBrokers(
+                        'assets/brokers/horizon.jpg', false, 'horizon homes'),
+                    propertyBrokers(
+                        'assets/brokers/structure.jpg', false, 'future group'),
                   ],
                 ),
               ),
-            )
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+              child: comment('person1.jpg', 'James Orengo'),
+            ),
           ],
         ),
       ),
@@ -74,8 +84,8 @@ class _SearchPageState extends State<SearchPage> {
     return Padding(
       padding: const EdgeInsets.all(6.0),
       child: Container(
-        width: 80,
-        height: 80,
+        width: 100,
+        height: 100,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -92,8 +102,26 @@ class _SearchPageState extends State<SearchPage> {
                 width: 40,
               ),
             ),
-            Positioned(child: Text('$name'),),
-            Positioned(child: Text('Broker'),),
+            Positioned(
+              bottom: 30,
+              left: 0,
+              right: 0,
+              child: Center(
+                  child: Text(
+                '$name',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              )),
+            ),
+            Positioned(
+              bottom: 10,
+              left: 0,
+              right: 0,
+              child: Center(
+                  child: Text(
+                'Broker',
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+              )),
+            ),
             Positioned(
               bottom: -2,
               right: 0,
@@ -102,7 +130,7 @@ class _SearchPageState extends State<SearchPage> {
                 width: 8,
                 height: 8,
                 decoration: BoxDecoration(
-                  color: _isSelected ? Colors.blue : Colors.white,
+                  color: _isSelected ? Colors.blue : Colors.transparent,
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
@@ -113,8 +141,46 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 
-  Widget comment() {
-    return Padding(padding: EdgeInsets.fromLTRB(20, 20, 20, 0));
+  Widget comment(String image, String name) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      child: Container(
+        width: 400,
+        padding: EdgeInsets.all(20),
+        decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(20)),
+        child: Column(
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundImage: AssetImage('assets/people/$image'),
+                  radius: 25,
+                ),
+                SizedBox(width: 20,),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '$name',
+                      style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      'Broker',
+                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                )
+              ],
+            ),
+            SizedBox(height: 10,),
+            Text(
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla consectetur nibh vestibulum ullamcorper feugiat. Maecenas finibus suscipit mauris, et feugiat purus vehicula id. Phasellus ac purus vitae est faucibus porttitor. Proin id nunc at arcu porta tincidunt nec a arcu. Suspendisse pulvinar congue tristique. Nunc ut grav',
+              style: TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 

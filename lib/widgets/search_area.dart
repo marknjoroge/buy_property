@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'constants.dart';
 
-
 class SearchArea extends StatefulWidget {
   @override
   _SearchAreaState createState() => _SearchAreaState();
@@ -37,7 +36,10 @@ class _SearchAreaState extends State<SearchArea> {
       ],
     );
   }
+
   Future<void> bottomModal(BuildContext context) {
+    double _currentSliderValue = 20;
+    double _currentSliderVal = 80;
     return showModalBottomSheet<void>(
       context: context,
       backgroundColor: Colors.transparent,
@@ -87,7 +89,10 @@ class _SearchAreaState extends State<SearchArea> {
                   left: 0,
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-                    child: SearchBar(color: Colors.grey[200], text: 'Search location', icon: Icon(Icons.pin_drop)),
+                    child: SearchBar(
+                        color: Colors.grey[200],
+                        text: 'Search location',
+                        icon: Icon(Icons.pin_drop)),
                   ),
                 ),
                 Positioned(
@@ -104,6 +109,188 @@ class _SearchAreaState extends State<SearchArea> {
                     ),
                   ),
                 ),
+                Positioned(
+                  top: 150,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                    child: ButtonBar(
+                      mainAxisSize: MainAxisSize
+                          .min, // this will take space as minimum as posible(to center)
+                      children: <Widget>[
+                        new ElevatedButton(
+                          child: new Text(
+                            'Apartments',
+                            style: TextStyle(color: Colors.white, fontSize: 19),
+                          ),
+                          onPressed: null,
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.blue),
+                              elevation: MaterialStateProperty.all(5)),
+                        ),
+                        new ElevatedButton(
+                          child: new Text(
+                            'Land',
+                            style: TextStyle(color: Colors.black, fontSize: 19),
+                          ),
+                          onPressed: null,
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              elevation: MaterialStateProperty.all(5)),
+                        ),
+                        new ElevatedButton(
+                          child: new Text(
+                            'Commercial',
+                            style: TextStyle(color: Colors.black, fontSize: 19),
+                          ),
+                          onPressed: null,
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              elevation: MaterialStateProperty.all(5)),
+                        ),
+                        new ElevatedButton(
+                          child: new Text(
+                            'villa',
+                            style: TextStyle(color: Colors.black, fontSize: 19),
+                          ),
+                          onPressed: null,
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              elevation: MaterialStateProperty.all(5)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 230,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        H3Title(title: 'Property Size'),
+                        Text(
+                          'Up to 1000 sqft',
+                          style: TextStyle(color: Colors.blue, fontSize: 20),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 260,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Slider(
+                      value: _currentSliderValue,
+                      min: 0,
+                      max: 100,
+                      divisions: 100,
+                      label: null,
+                      onChanged: (double value) {
+                        setState(() {
+                          _currentSliderValue = value;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 310,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: H3Title(title: 'Property type'),
+                  ),
+                ),
+                Positioned(
+                  top: 340,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Slider(
+                      value: _currentSliderVal,
+                      min: 0,
+                      max: 100,
+                      divisions: 100,
+                      label: null,
+                      onChanged: (double value) {
+                        setState(() {
+                          _currentSliderVal = value;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 400,
+                  left: 0,
+                  right: 0,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        TextButton(
+                          onPressed: null,
+                          style: ButtonStyle(
+                              minimumSize: MaterialStateProperty.all(
+                                Size(
+                                  MediaQuery.of(context).size.width * 0.35,
+                                  40,
+                                ),
+                              ),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white),
+                              elevation: MaterialStateProperty.all(3)),
+                          child: Text(
+                            'Reset',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 25,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: null,
+                          style: ButtonStyle(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0),)),
+                            minimumSize: MaterialStateProperty.all(
+                              Size(
+                                MediaQuery.of(context).size.width * 0.45,
+                                40,
+                              ),
+                            ),
+                            backgroundColor:
+                                MaterialStateProperty.all(Colors.green),
+                          ),
+                          child: Text(
+                            'Check Availability',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w300,
+                              fontSize: 25,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -111,9 +298,7 @@ class _SearchAreaState extends State<SearchArea> {
       },
     );
   }
-
 }
-
 
 class SearchBar extends StatelessWidget {
   SearchBar({
@@ -121,7 +306,10 @@ class SearchBar extends StatelessWidget {
     required Color? color,
     required String? text,
     required Icon? icon,
-  }) : _color = color, _text = text, _icon = icon, super(key: key);
+  })  : _color = color,
+        _text = text,
+        _icon = icon,
+        super(key: key);
 
   final Color? _color;
   final String? _text;
